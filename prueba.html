@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRUEBA-1B</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h2 class="tittle ">PRUEBA 1B PARTE PRÁCTICA </h2>
+    <h2 class="tittle ">Samanta Gómez & Gabriel Ibujés </h2>
+    <h1 class="tittle">BATALLA POKEMÓN</h1>
+    <img src="https://pngimg.com/uploads/pokeball/pokeball_PNG21.png" style="width: 60px; height: 60px; padding-left: 650px;">
+    
+
+    
+    <img src="https://pngimg.com/uploads/pokeball/pokeball_PNG21.png" style="width: 60px; height: 60px; padding-left: 0px;">
+    <br>
+    <div class="pokemon-list" id="listarpokemon">
+        <div class="pokemon" id="pok-1">
+            <img >
+            <p></p>
+            <div class="pokemon2" id="pok-2">
+            <img >
+            <p></p>
+            </div>
+        </div>
+
+        
+
+        <div class="vs">VS</div>
+
+        <div class="pokemon" id="pok-3">
+            <img >
+            <p></p>
+            <div class="pokemon2" id="pok-4">
+                <img >
+                <p></p>
+            </div>
+        </div>
+
+        
+
+    </div>
+    <br><br>
+    <div class="comezar" style="padding-left: 690px">
+            <button onclick="consultarPokemones()" style="border: 2px solid #000000; text-align: center; width: 150px; height:50px; border-radius: 6px; " class="btn btn-primary">COMENZAR</button>
+        </div>
+       
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png"
+        style="padding-left: 120px;" class="animated bounce infinite" alt="Transparent MDB Logo" id="animated-img1">
+
+
+
+    <script>
+
+        let lista = document.getElementById("listarpokemon");
+        function consultarPokemon(id, number) {
+
+            fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+                .then(res => {
+                    console.log(res);
+                    res.json()
+                        .then(pokemon => {
+                            console.log(pokemon);
+                            mostrarPokemon(pokemon, number)
+                        })
+                })
+        }
+        function consultarPokemones() {
+            let primerPokemon = Math.round(Math.random() * 150);
+            let segundoPokemon = Math.round(Math.random() * 150);
+            let tercerPokemon = Math.round(Math.random() * 150);
+            let cuartoPokemon = Math.round(Math.random() * 150);
+            consultarPokemon(primerPokemon, 1);
+            consultarPokemon(segundoPokemon, 2);
+            consultarPokemon(tercerPokemon, 3);
+            consultarPokemon(cuartoPokemon, 4);
+        }
+
+        function mostrarPokemon(pokemon, id) {
+            let item = lista.querySelector(`#pok-${id}`);
+            let img = item.getElementsByTagName("img")[0];
+            img.setAttribute("src", pokemon.sprites.front_default);
+            let nombre = item.getElementsByTagName("p")[0];
+            nombre.textContent = pokemon.name;
+        }
+        consultarPokemones();
+    </script>
+</body>
+</html>
